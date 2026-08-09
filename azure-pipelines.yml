@@ -1,0 +1,65 @@
+trigger:
+- main
+
+pool:
+  name: GUC-AP
+
+stages:
+
+# =========================
+# CI - BUILD & TEST
+# =========================
+- stage: CI
+  displayName: 'CI - Build and Test'
+
+  jobs:
+  - job: Build
+    displayName: 'Build Application'
+
+    steps:
+
+    # -------------------------
+    # Show environment
+    # -------------------------
+    - script: |
+        echo "===== Environment ====="
+        node --version
+        npm --version
+        java -version
+        mvn --version
+      displayName: 'Check Build Environment'
+
+    # -------------------------
+    # Frontend
+    # -------------------------
+    - script: |
+        cd frontend
+        npm ci
+        npm run build
+      displayName: 'Build Frontend'
+
+    # -------------------------
+    # Backend
+    # -------------------------
+    - script: |
+        cd backend
+        mvn clean test package
+      displayName: 'Build and Test Backend'
+
+    # -------------------------
+    # Publish Frontend
+    # -------------------------
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Frontend Artifact'
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/frontend/dist'
+        artifact: 'frontend'
+
+    # -------------------------
+    # Publish Backend
+    # -------------------------
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Backend Artifact'
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/backend/target'
+        artifact: 'backend'
