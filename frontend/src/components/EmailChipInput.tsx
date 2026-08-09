@@ -14,7 +14,7 @@
  *   • Rejects duplicate email silently.
  *   • Backspace on the empty email field removes the last chip.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { useState, useRef, KeyboardEvent } from "react";
 import type { AccountInput } from "../api/types";

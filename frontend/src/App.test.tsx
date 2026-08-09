@@ -3,7 +3,7 @@
  *
  * Tests router transitions: setup → run → results → setup
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, act } from "@testing-library/react";
@@ -85,7 +85,7 @@ describe("App router", () => {
   it("shows brand name and byline on initial render", () => {
     render(<App />);
     expect(screen.getByText("NAUKRI_AUTOMATOR")).toBeInTheDocument();
-    expect(screen.getAllByText(/Adikarthik Gupta C B/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Team Maverick/).length).toBeGreaterThan(0);
   });
 
   it("initial render shows SetupScreen", () => {

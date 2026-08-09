@@ -4,7 +4,7 @@
  * Stores up to MAX_JOBS entries under "naukri.jobs.v1".
  * Newest entries are always at the front of the array.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { useState, useCallback } from "react";
 import type { RunSummary } from "../screens/RunScreen";

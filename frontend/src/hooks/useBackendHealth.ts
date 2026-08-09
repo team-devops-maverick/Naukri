@@ -6,7 +6,7 @@ type Health = "starting" | "ready" | "offline";
  * Polls GET /api/health every 2s. Returns "starting" until first success,
  * "ready" once /api/health returns 200, "offline" if 5 consecutive polls fail.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 export function useBackendHealth(): Health {
   const [health, setHealth] = useState<Health>("starting");

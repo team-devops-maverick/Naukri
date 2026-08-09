@@ -1,7 +1,7 @@
 /**
  * TDD – RED tests written first, then EmailChipInput implemented to make them GREEN.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";

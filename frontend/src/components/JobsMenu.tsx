@@ -4,7 +4,7 @@
  * Shows up to 20 session-scoped job history entries with status pills,
  * relative timestamps, and clickable rows that route to Run or Results.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { useState, useEffect, useRef } from "react";
 import type { JobHistoryEntry, JobStatus } from "../hooks/useJobsHistory";

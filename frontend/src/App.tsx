@@ -3,7 +3,7 @@
  *
  * Screens: setup → run → results (→ back to setup via "New run")
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { useState } from "react";
 import { startJob, stopJob } from "./api/rest";
@@ -128,7 +128,7 @@ export default function App(): JSX.Element {
       <header className="px-8 py-4 flex items-center justify-between border-b border-white/5">
         <div>
           <h1 className="text-2xl accent-gradient">NAUKRI_AUTOMATOR</h1>
-          <p className="text-xs text-text-muted">by Adikarthik Gupta C B</p>
+          <p className="text-xs text-text-muted">by Team Maverick</p>
         </div>
         <div className="flex items-center gap-3">
           <button

@@ -1,7 +1,7 @@
 /**
  * TDD tests for Stepper — written RED first, then Stepper implemented.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";

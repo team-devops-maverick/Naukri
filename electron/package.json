@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "NaukriAutomator Electron shell",
   "main": "main.js",
-  "author": "Adikarthik Gupta C B",
+  "author": "Team Maverick",
   "license": "UNLICENSED",
   "private": true,
   "scripts": {

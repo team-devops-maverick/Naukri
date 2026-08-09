@@ -8,7 +8,7 @@
  *   outputFolder  — path to open in explorer
  *   onNewRun      — callback to reset back to setup
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import type { RunSummary } from "./RunScreen";
 import type { AccountView } from "../hooks/useJobStream";

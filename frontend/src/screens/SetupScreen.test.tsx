@@ -1,7 +1,7 @@
 /**
  * TDD – RED tests written first, then SetupScreen implemented to make them GREEN.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";

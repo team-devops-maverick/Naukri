@@ -1,7 +1,7 @@
 /**
  * Relative time formatter for job history display.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 
 /**

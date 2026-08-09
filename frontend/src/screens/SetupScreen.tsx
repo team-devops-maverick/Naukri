@@ -20,7 +20,7 @@
  *   • Live "Required to Start" checklist above the Start button
  *   • Backend health indicator pill
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { useState } from "react";
 import type { StartJobRequest, AccountInput } from "../api/types";
@@ -325,7 +325,7 @@ export default function SetupScreen({ onStart, busy = false }: Props) {
 
       {/* ── Build timestamp footer ── */}
       <p className="mt-4 text-center text-[10px] font-mono text-text-muted opacity-60">
-        Build {__BUILD_TS__.slice(0, 16).replace("T", " ")} &middot; by Adikarthik Gupta C B
+        Build {__BUILD_TS__.slice(0, 16).replace("T", " ")} &middot; by Team Maverick
       </p>
     </div>
   );

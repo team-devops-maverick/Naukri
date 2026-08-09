@@ -4,7 +4,7 @@
  * Props:
  *   current — which step is active: "setup" | "run" | "results"
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 
 type StepId = "setup" | "run" | "results";

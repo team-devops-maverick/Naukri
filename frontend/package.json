@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "author": "Adikarthik Gupta C B",
+  "author": "Team Maverick",
   "scripts": {
     "dev":     "vite",
     "build":   "tsc -b && vite build",
@@ -37,3 +37,4 @@
     "msw": "^2.3.0"
   }
 }
+

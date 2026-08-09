@@ -1,7 +1,7 @@
 /**
  * TDD tests for ResultsScreen — written RED first.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";

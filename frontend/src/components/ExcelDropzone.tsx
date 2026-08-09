@@ -12,7 +12,7 @@
  *   • Emits onParsed(rows) after a successful parse.
  *   • Shows an inline error alert on API failure.
  *
- * Created by: Adikarthik Gupta C B
+ * Created by: Team Maverick
  */
 import { useRef, useState, DragEvent, ChangeEvent } from "react";
 import { parseExcel } from "../api/rest";
