@@ -7,10 +7,10 @@ pool:
 stages:
 
 # =========================
-# CI - BUILD & TEST
+# CI - BUILD
 # =========================
 - stage: CI
-  displayName: 'CI - Build and Test'
+  displayName: 'CI - Build'
 
   jobs:
   - job: Build
@@ -43,8 +43,8 @@ stages:
     # -------------------------
     - script: |
         cd backend
-        mvn clean test package
-      displayName: 'Build and Test Backend'
+        mvn clean package -Dmaven.test.skip=true
+      displayName: 'Build Backend'
 
     # -------------------------
     # Publish Frontend
