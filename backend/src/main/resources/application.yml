@@ -1,6 +1,6 @@
 server:
-  port: 0
-  address: 127.0.0.1
+  port: ${SERVER_PORT:8080}
+  address: ${SERVER_ADDRESS:0.0.0.0}
 spring:
   application:
     name: naukri-be
