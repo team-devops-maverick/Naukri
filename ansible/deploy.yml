@@ -1,0 +1,133 @@
+---
+- name: Deploy Naukri backend
+  hosts: naukri_app
+  become: true
+
+  vars:
+    app_dir: /opt/naukri
+    jar_path: /opt/naukri/naukri-be.jar
+    app_port: 8080
+    build_number: 8
+    storage_account: stnaukridevops1786535568
+    storage_container: naukri-artifacts
+    blob_name: "backend/jar/build-{{ build_number }}/naukri-be.jar"
+
+  tasks:
+
+    - name: Ensure Java 17 is installed
+      ansible.builtin.apt:
+        name: openjdk-17-jre
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Create application directory
+      ansible.builtin.file:
+        path: "{{ app_dir }}"
+        state: directory
+        owner: azureuser
+        group: azureuser
+        mode: "0755"
+
+    - name: Stop Naukri service before deployment
+      ansible.builtin.systemd:
+        name: naukri
+        state: stopped
+      failed_when: false
+
+    - name: Verify artifact exists in Azure Blob Storage
+      become: false
+      ansible.builtin.shell: |
+        az storage blob exists \
+          --account-name "{{ storage_account }}" \
+          --container-name "{{ storage_container }}" \
+          --name "{{ blob_name }}" \
+          --auth-mode login \
+          --query exists \
+          -o tsv
+      args:
+        executable: /bin/bash
+      register: blob_exists
+      changed_when: false
+
+    - name: Fail if artifact does not exist
+      ansible.builtin.fail:
+        msg: "Artifact not found in Blob Storage: {{ blob_name }}"
+      when: blob_exists.stdout | trim != "true"
+
+    - name: Download JAR from Azure Blob Storage
+      become: false
+      ansible.builtin.shell: |
+        az storage blob download \
+          --account-name "{{ storage_account }}" \
+          --container-name "{{ storage_container }}" \
+          --name "{{ blob_name }}" \
+          --file "/tmp/naukri-be.jar" \
+          --auth-mode login \
+          --overwrite true
+      args:
+        executable: /bin/bash
+
+    - name: Install downloaded JAR
+      ansible.builtin.copy:
+        src: /tmp/naukri-be.jar
+        dest: "{{ jar_path }}"
+        owner: azureuser
+        group: azureuser
+        mode: "0644"
+        remote_src: True
+
+    - name: Remove temporary JAR
+      become: false
+      ansible.builtin.file:
+        path: /tmp/naukri-be.jar
+        state: absent
+
+    - name: Create Naukri systemd service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/naukri.service
+        mode: "0644"
+        content: |
+          [Unit]
+          Description=Naukri Backend
+          After=network.target
+
+          [Service]
+          Type=simple
+          User=azureuser
+          WorkingDirectory=/opt/naukri
+          ExecStart=/usr/bin/java -jar /opt/naukri/naukri-be.jar --server.port=8080
+          Restart=always
+          RestartSec=5
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    - name: Enable and start Naukri service
+      ansible.builtin.systemd:
+        name: naukri
+        enabled: true
+        state: started
+
+    - name: Wait for application port
+      ansible.builtin.wait_for:
+        host: 127.0.0.1
+        port: "{{ app_port }}"
+        delay: 2
+        timeout: 60
+
+    - name: Verify Naukri service
+      ansible.builtin.systemd:
+        name: naukri
+      register: naukri_service
+
+    - name: Display deployment status
+      ansible.builtin.debug:
+        msg:
+          - "Deployed artifact: {{ blob_name }}"
+          - "Service state: {{ naukri_service.status.ActiveState }}"
+          - "Application port: {{ app_port }}"
